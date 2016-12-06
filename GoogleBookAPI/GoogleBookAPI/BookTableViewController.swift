@@ -25,7 +25,7 @@ class BookTableViewController: UITableViewController, UISearchBarDelegate{
     func loadData(searchTerm: String = "bananana") {
     let queryString = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
     let bookEndpoint = "https://www.googleapis.com/books/v1/volumes?q=\(queryString!))"
-    APIRequestManager.manager.getData(endPoint: bookEndpoint) { (data:Data?) in
+        APIRequestManager.manager.getData(endPoint: bookEndpoint) { (data:Data?) in
         if let validData = data {
             if let jsonData = try? JSONSerialization.jsonObject(with: validData, options: []) {
                 if let wholeDict = jsonData as? [String:Any],
@@ -123,7 +123,7 @@ class BookTableViewController: UITableViewController, UISearchBarDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BookDetailViewController,
         let cell = sender as? BookTableViewCell,
-            let indexpath = tableView.indexPath(for: cell) {
+        let indexpath = tableView.indexPath(for: cell) {
             destination.selectedBook = allBooks[indexpath.row]
             destination.id = allBooks[indexpath.row].id 
         }

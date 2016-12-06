@@ -14,6 +14,7 @@ class Book {
     let thumbNail: String
     let  id : String
     let description: String
+    let imageDict: [String: String]
     
     
     init?(from Dict: [String: Any]) {
@@ -25,6 +26,7 @@ class Book {
             let imageDict = volumeInfo["imageLinks"] as? [String: String],
             let thumbnail = imageDict["smallThumbnail"]{
             self.title = title
+            self.imageDict = imageDict
             self.authors = authorsArray
             self.thumbNail = thumbnail
             self.id = identification
@@ -43,6 +45,14 @@ class Book {
             }
         }
         return books
+    }
+    
+    static func parseOneBook(from dict: [String:Any]) -> Book? {
+        if let book = Book(from: dict) {
+            return book
+        }
+        
+        return nil
     }
 
 }
